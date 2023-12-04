@@ -1,0 +1,87 @@
+basePath: /api/v1
+definitions:
+  CreateProduct:
+    properties:
+      description:
+        type: string
+      images:
+        items:
+          type: string
+        minItems: 1
+        type: array
+      name:
+        type: string
+      price:
+        type: number
+    required:
+    - description
+    - images
+    - name
+    - price
+    type: object
+  Response:
+    properties:
+      code:
+        description: |-
+          Code is the status code by default, but also can be
+          a custom code
+        type: integer
+      data:
+        description: Data accepts any thing as the response data
+      message:
+        description: Message shows detail thing back to caller
+        type: string
+      request_id:
+        description: RequestID needs to be used with middleware
+        type: string
+    type: object
+info:
+  contact:
+    email: venkateshwarachinnasamy@gmail.com
+  description: This is an auto-generated API Docs.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Zocket image process API
+  version: "1.0"
+paths:
+  /products:
+    post:
+      consumes:
+      - application/json
+      description: add a new product
+      operationId: add-product
+      parameters:
+      - description: body parameter
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/CreateProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: returns ok
+          schema:
+            type: string
+        "404":
+          description: 'bad request: validate your input params'
+          schema:
+            $ref: '#/definitions/Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Add Prodcut
+      tags:
+      - products
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
