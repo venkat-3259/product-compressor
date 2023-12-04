@@ -8,7 +8,7 @@
       "type": "pgx",
       "host": "localhost",
       "port": 5432,
-      "dbName": "zocket-images",
+      "dbName": "images",
       "userName": "postgres",
       "password": "password",
       "sslMode": "disable",
